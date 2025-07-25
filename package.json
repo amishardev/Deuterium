@@ -5,10 +5,12 @@
     "scripts": {
         "dev": "next dev --turbopack",
         "build": "next build",
-        "build:netlify": "npm install --legacy-peer-deps && next build",
+        "build:netlify": "npm ci --legacy-peer-deps && npm run build",
+        "build:check": "node scripts/build-check.js",
+        "prebuild": "npm run build:check",
         "start": "next start",
         "lint": "next lint",
-        "export": "next export"
+        "postbuild": "echo 'Build completed successfully'"
     },
     "dependencies": {
         "@headlessui/react": "^2.2.4",

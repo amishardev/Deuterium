@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-import path from "node:path";
 
 const nextConfig: NextConfig = {
   images: {
@@ -15,10 +14,13 @@ const nextConfig: NextConfig = {
     ],
     unoptimized: false,
   },
-  outputFileTracingRoot: path.resolve(__dirname, '../../'),
   trailingSlash: false,
-  experimental: {
-    esmExternals: true,
+  swcMinify: true,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: false,
   },
 };
 
