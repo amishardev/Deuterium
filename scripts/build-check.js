@@ -36,7 +36,7 @@ console.log('\n📦 Checking dependencies...');
 try {
   const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
   
-  const requiredDeps = ['next', 'react', 'react-dom', 'tailwindcss', '@tailwindcss/postcss', 'postcss'];
+  const requiredDeps = ['next', 'react', 'react-dom', 'tailwindcss', '@tailwindcss/postcss', 'postcss', 'tw-animate-css'];
   requiredDeps.forEach(dep => {
     if (packageJson.dependencies[dep]) {
       console.log(`✅ ${dep}: ${packageJson.dependencies[dep]}`);
@@ -121,6 +121,12 @@ if (fs.existsSync('src/app/globals.css')) {
     console.log('✅ Tailwind CSS imports found in globals.css');
   } else {
     console.log('⚠️ Tailwind CSS imports not found in globals.css');
+  }
+
+  if (globalsCss.includes('@import "tw-animate-css"') || globalsCss.includes("@import 'tw-animate-css'")) {
+    console.log('✅ tw-animate-css import found in globals.css');
+  } else {
+    console.log('⚠️ tw-animate-css import not found in globals.css');
   }
 } else {
   console.log('❌ globals.css not found');
