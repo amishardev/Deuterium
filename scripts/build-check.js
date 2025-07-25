@@ -36,7 +36,7 @@ console.log('\n📦 Checking dependencies...');
 try {
   const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
   
-  const requiredDeps = ['next', 'react', 'react-dom', 'tailwindcss', '@tailwindcss/postcss', 'postcss', 'tw-animate-css'];
+  const requiredDeps = ['next', 'react', 'react-dom', 'tailwindcss', '@tailwindcss/postcss', 'postcss', 'tw-animate-css', 'typescript', '@types/node', '@types/react', '@types/react-dom'];
   requiredDeps.forEach(dep => {
     if (packageJson.dependencies[dep]) {
       console.log(`✅ ${dep}: ${packageJson.dependencies[dep]}`);
@@ -69,6 +69,21 @@ try {
     } else {
       console.log('⚠️ Path mapping for @/* not found');
     }
+  }
+
+  // Check for TypeScript dependencies
+  const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+  const hasTypescript = packageJson.dependencies.typescript || packageJson.devDependencies?.typescript;
+  const hasTypesReact = packageJson.dependencies['@types/react'] || packageJson.devDependencies?.['@types/react'];
+  const hasTypesNode = packageJson.dependencies['@types/node'] || packageJson.devDependencies?.['@types/node'];
+
+  if (hasTypescript && hasTypesReact && hasTypesNode) {
+    console.log('✅ All required TypeScript packages available');
+  } else {
+    console.log('⚠️ Some TypeScript packages may be missing');
+    if (!hasTypescript) console.log('  - typescript package not found');
+    if (!hasTypesReact) console.log('  - @types/react package not found');
+    if (!hasTypesNode) console.log('  - @types/node package not found');
   }
 } catch (error) {
   console.log('❌ Error reading tsconfig.json:', error.message);
