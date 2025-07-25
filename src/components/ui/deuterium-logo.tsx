@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
 interface DeuteriumLogoProps {
@@ -14,13 +15,13 @@ export const DeuteriumLogo: React.FC<DeuteriumLogoProps> = ({
   imgClassName,
   textClassName,
 }) => {
-  const logoSrc = variant === 'main' 
-    ? 'https://github.com/amishardev/Deuterium-web/blob/main/DEUTERIUM.png?raw=true'
-    : 'https://github.com/amishardev/Deuterium-web/blob/main/Untitled%20design%20(2).png?raw=true';
+  const logoSrc = variant === 'main'
+    ? '/deuterium-logo.png'
+    : '/deuterium-logo.png'; // Using same logo for both variants for now
 
   return (
     <div className={cn('flex items-center gap-2', className)}>
-      <img
+      <Image
         src={logoSrc}
         alt="Deuterium Logo"
         width={48}
@@ -29,6 +30,8 @@ export const DeuteriumLogo: React.FC<DeuteriumLogoProps> = ({
           'object-contain transition-opacity duration-200 hover:opacity-90',
           imgClassName
         )}
+        priority={true}
+        unoptimized={true}
       />
       {textClassName && (
         <span className={cn('text-lg font-semibold', textClassName)}>

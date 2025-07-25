@@ -148,6 +148,40 @@ if (fs.existsSync('src/app/globals.css')) {
   hasErrors = true;
 }
 
+// Check image configuration
+console.log('\n🖼️ Checking image configuration...');
+if (fs.existsSync('next.config.ts') || fs.existsSync('next.config.js')) {
+  try {
+    const nextConfigContent = fs.readFileSync(fs.existsSync('next.config.ts') ? 'next.config.ts' : 'next.config.js', 'utf8');
+    if (nextConfigContent.includes('images:')) {
+      console.log('✅ Image configuration found in next.config');
+      if (nextConfigContent.includes('unoptimized: true')) {
+        console.log('✅ Image optimization disabled for Netlify compatibility');
+      } else {
+        console.log('⚠️ Consider setting unoptimized: true for Netlify deployment');
+      }
+    } else {
+      console.log('⚠️ No image configuration found in next.config');
+    }
+  } catch (error) {
+    console.log('⚠️ Could not read next.config file');
+  }
+}
+
+// Check for public images
+if (fs.existsSync('public')) {
+  const publicFiles = fs.readdirSync('public');
+  const imageFiles = publicFiles.filter(file =>
+    file.endsWith('.png') || file.endsWith('.jpg') || file.endsWith('.jpeg') ||
+    file.endsWith('.svg') || file.endsWith('.webp') || file.endsWith('.gif')
+  );
+  if (imageFiles.length > 0) {
+    console.log(`✅ Found ${imageFiles.length} image files in public directory`);
+  } else {
+    console.log('⚠️ No image files found in public directory');
+  }
+}
+
 // Summary
 console.log('\n📊 Build Check Summary:');
 if (hasErrors) {
