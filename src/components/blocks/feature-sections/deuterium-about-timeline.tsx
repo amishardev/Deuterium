@@ -14,24 +14,24 @@ interface TimelineItemProps {
 
 const timelineData: Omit<TimelineItemProps, 'isLast'>[] = [
   {
-    year: "2018",
-    title: "Inception & Foundation",
-    description: "Our journey began with a shared vision to dismantle complexity and forge elegant, enterprise-grade solutions that redefine digital interaction.",
+    year: "2025",
+    title: "Deuterium Established",
+    description: "With a bold vision for the future, we officially launched Deuterium, laying the foundation for a next-gen ecosystem that redefines intelligence and connectivity.",
   },
   {
-    year: "2020",
-    title: "Flagship Platform Launch",
-    description: "We successfully launched our flagship platform, introducing a new paradigm in performance and usability that set new industry standards.",
+    year: "2025",
+    title: "Founded IRA AI",
+    description: "Designed to be a compassionate and intuitive companion, we introduced IRA — an intelligent humanoid assistant built to bring emotion and empathy into AI interaction.",
   },
   {
-    year: "2022",
-    title: "Global Expansion",
-    description: "Marking a key milestone, we opened our first international office, extending our unique approach to a global client base.",
+    year: "2025",
+    title: "Made Trinity LLM",
+    description: "Taking a giant leap in neural architecture, we created Trinity LLM — a powerful language model designed for real-time learning, conversation, and adaptive reasoning.",
   },
   {
-    year: "2024",
-    title: "Pioneering the Future",
-    description: "Recognized as a definitive leader in human-centric technology, we continue to innovate with a future-forward design philosophy.",
+    year: "2025",
+    title: "Made Trinity OS",
+    description: "Blending robotics with artificial intelligence, we developed Trinity OS — a fully adaptive, AI-based operating system crafted for humanoid and service robots.",
   },
 ];
 
