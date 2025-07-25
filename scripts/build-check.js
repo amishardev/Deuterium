@@ -64,11 +64,39 @@ try {
   const tsconfig = JSON.parse(fs.readFileSync('tsconfig.json', 'utf8'));
   if (tsconfig.compilerOptions) {
     console.log('✅ TypeScript configuration found');
+    if (tsconfig.compilerOptions.paths && tsconfig.compilerOptions.paths['@/*']) {
+      console.log('✅ Path mapping configured for @/*');
+    } else {
+      console.log('⚠️ Path mapping for @/* not found');
+    }
   }
 } catch (error) {
   console.log('❌ Error reading tsconfig.json:', error.message);
   hasErrors = true;
 }
+
+// Check specific component files
+console.log('\n📦 Checking required components...');
+const requiredComponents = [
+  'src/components/ErrorReporter.tsx',
+  'src/components/blocks/heros/deuterium-hero-with-animation.tsx',
+  'src/components/blocks/feature-sections/deuterium-about-timeline.tsx',
+  'src/components/blocks/feature-sections/deuterium-technologies.tsx',
+  'src/components/blocks/cards/deuterium-bot-cards.tsx',
+  'src/components/blocks/feature-sections/deuterium-labs-research.tsx',
+  'src/components/blocks/ctas/deuterium-careers-board.tsx',
+  'src/components/blocks/contact-forms/deuterium-holographic-contact.tsx',
+  'src/components/blocks/footers/deuterium-minimal-footer.tsx'
+];
+
+requiredComponents.forEach(component => {
+  if (fs.existsSync(component)) {
+    console.log(`✅ ${component}`);
+  } else {
+    console.log(`❌ Missing component: ${component}`);
+    hasErrors = true;
+  }
+});
 
 // Check Next.js configuration
 console.log('\n⚙️ Checking Next.js config...');
