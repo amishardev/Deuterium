@@ -13,8 +13,13 @@ const nextConfig: NextConfig = {
         hostname: '**',
       },
     ],
+    unoptimized: false,
   },
   outputFileTracingRoot: path.resolve(__dirname, '../../'),
+  trailingSlash: false,
+  experimental: {
+    esmExternals: true,
+  },
 };
 
 export default nextConfig;

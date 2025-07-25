@@ -5,8 +5,10 @@
     "scripts": {
         "dev": "next dev --turbopack",
         "build": "next build",
+        "build:netlify": "npm install --legacy-peer-deps && next build",
         "start": "next start",
-        "lint": "next lint"
+        "lint": "next lint",
+        "export": "next export"
     },
     "dependencies": {
         "@headlessui/react": "^2.2.4",
