@@ -36,7 +36,7 @@ console.log('\n📦 Checking dependencies...');
 try {
   const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
   
-  const requiredDeps = ['next', 'react', 'react-dom'];
+  const requiredDeps = ['next', 'react', 'react-dom', 'tailwindcss', '@tailwindcss/postcss', 'postcss'];
   requiredDeps.forEach(dep => {
     if (packageJson.dependencies[dep]) {
       console.log(`✅ ${dep}: ${packageJson.dependencies[dep]}`);
@@ -104,6 +104,27 @@ if (fs.existsSync('next.config.ts') || fs.existsSync('next.config.js')) {
   console.log('✅ Next.js configuration found');
 } else {
   console.log('⚠️ No Next.js configuration found (optional)');
+}
+
+// Check PostCSS configuration
+console.log('\n🎨 Checking PostCSS/Tailwind config...');
+if (fs.existsSync('postcss.config.mjs') || fs.existsSync('postcss.config.js')) {
+  console.log('✅ PostCSS configuration found');
+} else {
+  console.log('❌ PostCSS configuration missing');
+  hasErrors = true;
+}
+
+if (fs.existsSync('src/app/globals.css')) {
+  const globalsCss = fs.readFileSync('src/app/globals.css', 'utf8');
+  if (globalsCss.includes('@import \'tailwindcss\'') || globalsCss.includes('@tailwind')) {
+    console.log('✅ Tailwind CSS imports found in globals.css');
+  } else {
+    console.log('⚠️ Tailwind CSS imports not found in globals.css');
+  }
+} else {
+  console.log('❌ globals.css not found');
+  hasErrors = true;
 }
 
 // Summary
